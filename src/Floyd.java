@@ -10,28 +10,29 @@ public class Floyd {
   }
 
   private static void processGraphs(Cell[][] initialCellMatrix) {
-    Cell[][] processGraphMap = initialCellMatrix;
-    for (int specRowAndCol = 0; specRowAndCol < processGraphMap.length; specRowAndCol++) {
-      for (int row = 0; row < processGraphMap.length; row++) {
-        for (int col = 0; col < processGraphMap.length; col++) {
+    Cell[][] processGraphMatrix = initialCellMatrix;
+    for (int specRowAndCol = 0; specRowAndCol < processGraphMatrix.length; specRowAndCol++) {
+      for (int row = 0; row < processGraphMatrix.length; row++) {
+        for (int col = 0; col < processGraphMatrix.length; col++) {
           if ((row != col) && (row != specRowAndCol) && (col != specRowAndCol)) {
-            Cell cell = processGraphMap[row][col];
+            Cell cell = processGraphMatrix[row][col];
             int initialValue = cell.getValue();
 
-            Cell compareValueOneCell = processGraphMap[specRowAndCol][col];
+            Cell compareValueOneCell = processGraphMatrix[specRowAndCol][col];
             int compareValueOne = compareValueOneCell.getValue();
 
-            Cell compareValueTwoCell = processGraphMap[row][specRowAndCol];
+            Cell compareValueTwoCell = processGraphMatrix[row][specRowAndCol];
             int compareValueTwo = compareValueTwoCell.getValue();
 
             if (initialValue > (compareValueOne + compareValueTwo)) {
-              
+              cell.setValue(compareValueOne + compareValueTwo);
+              cell.setIteration(specRowAndCol);
             }
           }
         }
       }
     }
-    displayProcessedGraphMap(processGraphMap);
+    displayProcessedGraphMap(processGraphMatrix);
   }
 
   public static void main(String[] args) {
@@ -65,7 +66,7 @@ class UserData {
       numOfVertices = in.nextInt();
     }
 
-    Cell[][] initialCellMatrix = new Cell[][]{};
+    Cell[][] initialCellMatrix = new Cell[numOfVertices][numOfVertices];
 
     for (int i = 0; i < numOfVertices; i++) {//Row loop
       for (int j = 0; j < numOfVertices; j++) {//Column loop
