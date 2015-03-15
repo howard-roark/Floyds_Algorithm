@@ -1,12 +1,28 @@
 import java.util.Scanner;
 
 /**
- * Created by Matthew McGuire on 3/1/15.
+ * @author Matthew McGuire
+ * CS 4050 Floyd Exercise
  */
 public class Floyd {
 
-  private static void displayProcessedGraphMap(Cell[][] finalCellMatrix) {
-    //TODO show processed graph
+  private static void displayProcessedGraphMap(Cell[][] processedGraph, int iterationVal) {
+    System.out.println("\n\n\t\tVALUE Graph at iteration: " + (iterationVal + 1));
+    for (int row = 0; row < processedGraph.length; row++) {
+      for (int col = 0; col < processedGraph[row].length; col++) {
+        System.out.printf("%12d", processedGraph[row][col].getValue());
+      }
+      System.out.println();
+    }
+
+    System.out.println("\n\n\t\tITERATION Values per cell at iteration: " + (iterationVal + 1));
+    for (int row = 0; row < processedGraph.length; row++) {
+      for (int col = 0; col < processedGraph[row].length; col++) {
+        System.out.printf("%12d", processedGraph[row][col].getIteration());
+      }
+      System.out.println();
+    }
+
   }
 
   private static void processGraphs(Cell[][] initialCellMatrix) {
@@ -24,15 +40,17 @@ public class Floyd {
             Cell compareValueTwoCell = processGraphMatrix[row][specRowAndCol];
             int compareValueTwo = compareValueTwoCell.getValue();
 
-            if (initialValue > (compareValueOne + compareValueTwo)) {
+            int specRowColCompareVal = compareValueOne + compareValueTwo;
+            if (initialValue > (specRowColCompareVal < 0 ? Integer.MAX_VALUE
+                                                         : specRowColCompareVal)) {
               cell.setValue(compareValueOne + compareValueTwo);
               cell.setIteration(specRowAndCol);
             }
           }
         }
       }
+      displayProcessedGraphMap(processGraphMatrix, specRowAndCol);
     }
-    displayProcessedGraphMap(processGraphMatrix);
   }
 
   public static void main(String[] args) {
