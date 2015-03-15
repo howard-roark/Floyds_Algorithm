@@ -77,7 +77,8 @@ class UserData {
         } else {
           System.out.println("\tPlease enter the weights for the path " +
                              "from V:" + (i + 1) + " and V:" + (j + 1));
-          int weight = -9;
+          int weight = Integer.MIN_VALUE;
+
           while (!in.hasNextInt()) {
             System.err.println("Please enter a valid integer for " +
                                "the path weight for V:" + (i + 1) + " to V:" + (j + 1));
@@ -86,11 +87,16 @@ class UserData {
             } catch (Exception e) {
             }
           }
-          if (weight == -9) {
+
+          if (weight == Integer.MIN_VALUE) {
             weight = in.nextInt();
           }
 
-          System.out.println("To get from V:" + (i + 1) + " to V: " + (j + 1) +
+          if (weight == -1) {
+            weight = Integer.MAX_VALUE;
+          }
+
+          System.out.println("To get from V:" + (i + 1) + " to V:" + (j + 1) +
                              " weighs: " + weight);
           Cell cell = new Cell(weight, 0);
           initialCellMatrix[i][j] = cell;
@@ -103,9 +109,11 @@ class UserData {
 
 /**
  * This class will hold the value of the distance between 2 points and the iteration of the
- * algorithm in which that value was derived.
+ * algorithm in which that value was derived, which is also the point which is added between two
+ * points to make the distance shorter.
  */
 class Cell {
+
   private int value = -1;
   private int iteration = -1;
 
