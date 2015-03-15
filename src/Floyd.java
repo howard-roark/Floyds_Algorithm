@@ -2,27 +2,33 @@ import java.util.Scanner;
 
 /**
  * @author Matthew McGuire
- * CS 4050 Floyd Exercise
+ *
+ *         CS 4050 Floyd Exercise
  */
 public class Floyd {
 
   private static void displayProcessedGraphMap(Cell[][] processedGraph, int iterationVal) {
-    System.out.println("\n\n\t\tVALUE Graph at iteration: " + (iterationVal + 1));
+    System.out
+        .println("\n\n\t\t\u001B[34mVALUE\u001B[0m Graph at iteration: " + (iterationVal + 1));
     for (int row = 0; row < processedGraph.length; row++) {
       for (int col = 0; col < processedGraph[row].length; col++) {
-        System.out.printf("%12d", processedGraph[row][col].getValue());
+        int val = processedGraph[row][col].getValue();
+        System.out.print("\t\t");
+        System.out.printf("%-12s", (val == Integer.MAX_VALUE) ? "-" : val);
       }
       System.out.println();
     }
 
-    System.out.println("\n\n\t\tITERATION Values per cell at iteration: " + (iterationVal + 1));
+    System.out.println(
+        "\n\n\t\t\u001B[34mITERATION\u001B[0m Values per cell at iteration: " + (iterationVal + 1));
     for (int row = 0; row < processedGraph.length; row++) {
       for (int col = 0; col < processedGraph[row].length; col++) {
-        System.out.printf("%12d", processedGraph[row][col].getIteration());
+        System.out.print("\t\t");
+        System.out.printf("%-12d", processedGraph[row][col].getIteration());
       }
       System.out.println();
     }
-
+    System.out.println("\n\t\t------------------------");
   }
 
   private static void processGraphs(Cell[][] initialCellMatrix) {
