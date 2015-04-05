@@ -24,7 +24,7 @@ public class Floyd {
     for (int row = 0; row < processedGraph.length; row++) {
       for (int col = 0; col < processedGraph[row].length; col++) {
         System.out.print("\t\t");
-        System.out.printf("%-12d", processedGraph[row][col].getIteration());
+        System.out.printf("%-12d", processedGraph[row][col].getIteration() + 1);
       }
       System.out.println();
     }
